@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Sidebar</title>
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #E1F5FE;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100%;
+            background-color: #0E3D77;
+            color: white;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            transition: left 0.3s ease-in-out;
+            padding-top: 60px;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background 0.3s;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #8EB4E3;
+        }
+
+        .sidebar ul li.active {
+            background-color: #1A73E8;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease-in-out;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Menu Icon */
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            background: #0E3D77;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: 0.3s;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+        }
+
+        .menu-icon:hover {
+            background: #1A73E8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+        }
+
+        a {
+        text-decoration: none;
+        margin-top: 5px;
+        justify-content: center;
+        text-align: center;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        color: black;
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Menu Icon (Fixed on Top) -->
+    <span class="menu-icon" id="menuIcon" onclick="toggleSidebar()">☰</span>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li class="active">📊 Dashboard Overview</li>
+            <li>📦 Inventory Management</li>
+            <li>🚚 Order and logistics</li>
+            <li>📈 Suppliers</li>
+            <li>⚙️ Settings</li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2> The AMYSPARES Dashboard</h2>
+        <p>Welcome to your dashboard! Click the menu icon to toggle the sidebar.</p>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            const menuIcon = document.getElementById("menuIcon");
+
+            sidebar.classList.toggle("active");
+
+            // Toggle the menu icon between ☰ and ✖
+            if (sidebar.classList.contains("active")) {
+                menuIcon.textContent = "✖";
+            } else {
+                menuIcon.textContent = "☰";
+            }
+        }
+    </script>
+
+</body>
+
+<footer><a href="auth.html"><strong>logout </strong></a></footer>
+</html>
