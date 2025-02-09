@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="dash_style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar Menu -->
+    <aside class="sidebar">
+      <h2>Navigation</h2>
+      <ul>
+        <li><a href="dashboard1.html">Dashboard</a></li>
+        <li><a href="#">Inventory</a></li>
+        <li><a href="#">Orders and Logistics</a></li>
+        <li><a href="#">Suppliers</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header>
+        <h1>Dashboard</h1>
+      </header>
+
+      <section class="cards">
+        <div class="card">
+          <h3>Count of all products</h3>
+          <p>2503 products</p>
+        </div>
+        <div class="card">
+          <h3>Products out of stock</h3>
+          <p>13 products</p>
+        </div>
+        <div class="card">
+          <h3>Products overstocked</h3>
+          <p>0 products</p>
+        </div>
+      </section>
+
+      <!-- Donut Charts Section -->
+      <section class="charts">
+        <div class="chart">
+          <h3>Product value by category</h3>
+          <canvas id="categoryChart"></canvas>
+        </div>
+        <div class="chart">
+          <h3>Top Selling Products</h3>
+          <canvas id="topSellingProductsChart" width="400" height="200"></canvas>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="dash_script.js"></script>
+</body>
+</html>
