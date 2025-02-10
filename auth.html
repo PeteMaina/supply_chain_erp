@@ -4,8 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supply Chain ERP Authentication</title>
-    <link rel="stylesheet" href="auth.css">
+    
     <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+
+    <style>
+       /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    margin-top: 5px;
+    justify-content: center;
+    color: #E1F5FE;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0E3D77;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 1) 10px 60px 60px -7px;
+    border-radius: 26px;
+    background: linear-gradient(315deg, #0E3D77, #1A73E8);
+    box-shadow:  -11px -11px 13px #115269, 1px 11px 13px  #080808;
+}
+
+.auth-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.form {
+    display: none;
+    margin: 0 auto;
+}
+
+.form.active {
+    display: block;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    background-color: #E1F5FE; /* Very Light Blue */
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    box-shadow: 0 0 5px 1 #8EB4E3; /* Light Blue Border on Focus */
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #1A73E8; /* Medium Blue */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0E3D77; /* Dark Blue on Hover */
+    box-shadow:  0 7px 12px  rgba(0, 0, 0, 4);
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.forgot-password a {
+    color: #8EB4E3; /* Light Blue Link Color */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.forgot-password a:hover {
+    color: #1A73E8; /* Medium Blue on Hover */
+} 
+    </style>
+
 </head>
 <body>
     <div class="auth-container">
@@ -57,6 +167,58 @@
         </div>
     </div>
 
-    <script src="auth.js"></script>
+    <script>
+        // Toggle forms
+function showLoginForm() {
+    document.getElementById('loginForm').classList.add('active');
+    document.getElementById('forgotPasswordForm').classList.remove('active');
+    document.getElementById('resetPasswordForm').classList.remove('active');
+}
+
+function showForgotPassword() {
+    document.getElementById('forgotPasswordForm').classList.add('active');
+    document.getElementById('loginForm').classList.remove('active');
+    document.getElementById('resetPasswordForm').classList.remove('active');
+}
+
+function sendResetLink() {
+    const email = document.getElementById('email').value.trim();
+    if (!email) {
+        alert('Please enter your email address.');
+        return;
+    }
+    alert(`Password reset link sent to ${email}.`);
+    showLoginForm(); // Return to login form after sending the link
+}
+
+function resetPassword() {
+    const newPassword = document.getElementById('newPassword').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+    if (!newPassword || !confirmPassword) {
+        alert('Please enter both new password and confirmation.');
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+    }
+
+    alert('Password reset successful!');
+    showLoginForm(); // Return to login form after resetting the password
+}
+
+// Default form on page load
+document.addEventListener('DOMContentLoaded', () => {
+    showLoginForm();
+});
+
+// Toggle Sidebar
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
+    </script>
 </body>
 </html>
