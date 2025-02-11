@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Management Dashboard</title>
+    <title>Inventory</title>
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
     <style>
         /* Bootstrap core styles */
         :root {
@@ -635,7 +636,7 @@
         .sidebar {
             width: 250px;
             height: 100%;
-            background-color: #1ad809;
+            background-color: #0E3D77;
             color: white;
             position: fixed;
             left: -250px;
@@ -650,21 +651,18 @@
         }
 
         .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-        .sidebar ul li {
-            padding: 0;
-        }
-
-        .sidebar ul li a {
-            padding: 15px 20px;
-            transition: background 0.3s;
-            display: block;
-        }
-
+    .sidebar ul li {
+        padding: 15px 20px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        transition: background 0.3s;
+        text-align: left;
+    }
         .sidebar ul li:hover a {
             background-color: #8EB4E3;
         }
@@ -675,19 +673,19 @@
 
         /* Menu Icon styles */
         .menu-icon {
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
             background: #0E3D77;
             color: white;
-            padding: 12px 18px;
+            padding: 10px 15px;
             border-radius: 8px;
             display: inline-block;
             transition: all 0.3s ease;
             position: fixed;
             top: 15px;
-            left: 20px;
-            z-index: 9999;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            left: 15px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .menu-icon:hover {
@@ -773,6 +771,19 @@
             transform: translateX(5px);
             transition: transform 0.3s ease;
         }
+
+        footer {
+    width: 100%;
+    background: #0E3D77;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+}
+footer a{
+    text-decoration: none;
+}
     </style>
 </head>
 <body>
@@ -780,8 +791,8 @@
 
     <div class="sidebar" id="sidebar">
         <ul>
-            <li class="active"><a href="dashboard.html">📊 Dashboard Overview</a></li>
-            <li><a href="cursor inv.html">📦 Inventory Management</a></li>
+            <li><a href="dashboard.html">📊 Dashboard Overview</a></li>
+            <li class="active"><a href="Invetory.html">📦 Inventory Management</a></li>
             <li><a href="#">🚚 Order and logistics</a></li>
             <li><a href="#">📈 Suppliers</a></li>
             <li><a href="#">⚙️ Settings</a></li>
@@ -790,9 +801,9 @@
 
     <div class="container-fluid p-4">
         <!-- Top Navigation -->
-        <nav class="navbar navbar-dark bg-success mb-4">
+        <nav>
             <div class="container-fluid position-relative">
-                <span class="navbar-brand w-100 text-center">Inventory Admin Dashboard</span>
+                <span class="navbar-brand w-100 text-center">Inventory</span>
                 <button onclick="toggleDarkMode()" class="btn btn-light position-absolute dark-mode-btn">
                     <i class="fas fa-moon"></i> Darkmode
                 </button>
@@ -1166,4 +1177,7 @@
         });
     </script>
 </body>
+
+<footer><a href="auth.html"><strong>logout </strong></a></footer>
+
 </html>
