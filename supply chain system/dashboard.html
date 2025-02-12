@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #eef2f3; /* Light background */
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px; /* Max width for better readability */
+    margin: 20px auto; /* Centered with margin */
+    padding: 20px;
+    background: #ffffff; /* White background for the container */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #4caf50; /* Green title */
+    margin-bottom: 20px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: flex-start; /* Align buttons to the left */
+    margin-bottom: 30px;
+}
+
+button {
+    width: 100%; /* Full width buttons */
+    padding: 15px; /* Consistent padding */
+    background-color: #4caf50; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0; /* Space between buttons */
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #388e3c; /* Darker green on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+button:active {
+    transform: translateY(0); /* Reset on click */
+}
+
+.content {
+    padding: 20px;
+    background: #f9f9f9; /* Light section background */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+#dynamicContent {
+    text-align: center; /* Center dynamic content */
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    button {
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+
+    .container {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+}
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders and Logistics Dashboard</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Orders and Logistics Dashboard</h1>
+        <div class="menu">
+            <button onclick="window.location.href='orderprocessing.html';">Order Processing and Fulfillment</button>
+            <button onclick="window.location.href='neworder.html';">Add New Order</button>
+            <button onclick="window.location.href='trackingStatus.html';">Tracking and Status Update</button>
+            <button onclick="window.location.href='returnExchange.html';">Return and Exchange Management</button>
+            <button onclick="window.location.href='carrierDetails.html';">Carrier Details</button>
+            <button onclick="window.location.href='realTimeTracking.html';">Real-Time Tracking</button>
+            <button onclick="window.location.href='deliverySummery.html';">Delivery Summary</button>
+        </div>
+        
+        <div class="content">
+            <!-- Dynamic content will be displayed here -->
+            <div id="dynamicContent"></div>
+        </div>
+    </div>
+</body>
+<script>
+    function navigateTo(section) {
+    const dynamicContent = document.getElementById('dynamicContent');
+    
+    switch (section) {
+        case 'orderProcessing':
+            dynamicContent.innerHTML = `<h2>Order Processing and Fulfillment</h2><p>Manage your orders efficiently here.</p>`;
+            break;
+        case 'addOrder':
+            dynamicContent.innerHTML = `<h2>Add New Order</h2><p>Form to add a new order will go here.</p>`;
+            break;
+        case 'trackingStatus':
+            dynamicContent.innerHTML = `<h2>Tracking and Status Update</h2><p>Track your orders and see status updates.</p>`;
+            break;
+        case 'returnExchange':
+            dynamicContent.innerHTML = `<h2>Return and Exchange Management</h2><p>Manage returns and exchanges here.</p>`;
+            break;
+        case 'carrierDetails':
+            dynamicContent.innerHTML = `<h2>Carrier Details</h2><p>Information about carriers will be displayed here.</p>`;
+            break;
+        case 'realTimeTracking':
+            dynamicContent.innerHTML = `<h2>Real-Time Tracking</h2><p>Track shipments in real-time.</p>`;
+            break;
+        case 'deliverySummary':
+            dynamicContent.innerHTML = `<h2>Delivery Summary</h2><p>View the summary of deliveries here.</p>`;
+            break;
+        default:
+            dynamicContent.innerHTML = `<h2>Welcome</h2><p>Select an option from the menu above.</p>`;
+    }
+}
+
+// Initialize with welcome message
+navigateTo('');
+</script>
+</html>
