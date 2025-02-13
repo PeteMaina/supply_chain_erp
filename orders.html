@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orders Management</title>
+  <style>
+    /* Global Styles */
+    html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1; /* Pushes content up and footer down */
+}
+
+    * {
+      
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #eef2f3;
+      color: #333;
+    }
+    
+    /* Global Button Styling (applies to all buttons) */
+    button {
+      background: #1A73E8;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s, box-shadow 0.3s;
+      display: inline-block;
+    }
+    
+    button:hover {
+      background: #1664C1;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    button.active {
+      background: #0E3D77;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Top Navigation (Horizontal, right aligned) */
+    .top-nav {
+      width: 100%;
+      padding: 10px;
+    }
+    
+    .top-nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .top-nav ul li {
+      margin-left: 10px;
+    }
+    
+    /* Container for sections */
+    .container {
+      padding: 20px;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: #0E3D77;
+      margin-bottom: 10px;
+    }
+    
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    
+    table,
+    th,
+    td {
+      border: 1px solid #ccc;
+    }
+    
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+    }
+    
+    /* Forms & Inputs */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    input,
+    select,
+    textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    /* Summary Boxes */
+    .summary {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    
+    .summary-item {
+      background: #f0f0f0;
+      padding: 20px;
+      border-radius: 5px;
+      margin: 5px;
+      text-align: center;
+      flex: 1;
+      min-width: 150px;
+    }
+    
+    /* Result Messages */
+    .result-message,
+    .tracking-result,
+    .update-result {
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    /* Sections (all hidden by default) */
+    .section {
+      display: none;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      height: 100%;
+      background-color: #0E3D77;
+      color: white;
+      position: fixed;
+      left: -250px;
+      top: 0;
+      transition: left 0.3s ease-in-out;
+      padding-top: 60px;
+    }
+    
+    .sidebar.active {
+      left: 0;
+    }
+    
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .sidebar ul li {
+      padding: 15px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      transition: background 0.3s;
+      text-align: left;
+    }
+    
+    .sidebar ul li:hover {
+      background-color: #8EB4E3;
+    }
+    
+    .sidebar ul li.active {
+      background-color: #1A73E8;
+    }
+    
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      background: #0E3D77;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      display: inline-block;
+      transition: 0.3s;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1000;
+    }
+    
+    .menu-icon:hover {
+      background: #1A73E8;
+    }
+    
+    a {
+      text-decoration: none;
+      margin-top: 5px;
+      display: flex;
+      width: 100%;
+      color: black;
+    }
+    
+    @media (max-width: 768px) {
+      form {
+        font-size: 14px;
+      }
+    }
+
+ footer {
+    width: 100%;
+    background: #0E3D77;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: 0;
+    }
+
+
+  </style>
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+</head>
+<body>
+  <span class="menu-icon" id="menuIcon" onclick="toggleSidebar()">☰</span>
+  
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="dashboard.html">📊 Dashboard Overview</a></li>
+      <li><a href="Invetory.html">📦 Inventory Management</a></li>
+      <li class="active">🚚 Order and logistics</li>
+      <li>📈 Suppliers</li>
+      <li>⚙️ Settings</li>
+    </ul>
+  </div>
+  
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <ul>
+      <!-- Removed Dashboard button -->
+      <li><button onclick="showSection('orderProcessing', this)">Order Processing</button></li>
+      <li><button onclick="showSection('newOrder', this)">New Order</button></li>
+      <li><button onclick="showSection('trackingStatus', this)">Tracking &amp; Status</button></li>
+      <li><button onclick="showSection('carrierDetails', this)">Carrier Details</button></li>
+      <li><button onclick="showSection('deliverySummary', this)">Delivery Summary</button></li>
+      <li><button onclick="showSection('realTimeTracking', this)">Real-Time Tracking</button></li>
+      <li><button onclick="showSection('returnExchange', this)">Return &amp; Exchange</button></li>
+    </ul>
+  </nav>
+  
+  <!-- Main Content Container -->
+  <div class="container">
+  
+    
+    <!-- Order Processing and Fulfillment Section -->
+    <div id="orderProcessing" class="section">
+      <h2>Order Processing and Fulfillment</h2>
+      <section class="current-orders">
+        <h3>Current Orders</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer Name</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>Peter Maina</td>
+              <td>Processing</td>
+              <td>
+                <button onclick="orderProcessingProcess('001')">Process</button>
+              </td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>Amy Wanjala</td>
+              <td>Shipped</td>
+              <td>
+                <button onclick="orderProcessingProcess('002')">Update Status</button>
+              </td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>Mark Donald</td>
+              <td>Delivered</td>
+              <td>
+                <button onclick="orderProcessingProcess('003')">View Details</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="process-order">
+        <h3>Process a New Order</h3>
+        <form id="orderProcessingForm">
+          <label for="orderProcessingId">Order ID:</label>
+          <input type="text" id="orderProcessingId" required />
+          <label for="orderProcessingCustomer">Customer Name:</label>
+          <input type="text" id="orderProcessingCustomer" required />
+          <label for="orderProcessingStatus">Order Status:</label>
+          <select id="orderProcessingStatus">
+            <option value="Processing">Processing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+          <button type="submit">Submit Order</button>
+        </form>
+      </section>
+      <section class="fulfillment-summary">
+        <h3>Fulfillment Summary</h3>
+        <div class="summary">
+          <div class="summary-item">
+            <h4>Total Orders</h4>
+            <p>3</p>
+          </div>
+          <div class="summary-item">
+            <h4>Orders Processed</h4>
+            <p>2</p>
+          </div>
+          <div class="summary-item">
+            <h4>Pending Orders</h4>
+            <p>1</p>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- New Order Section -->
+    <div id="newOrder" class="section">
+      <h2>Orders Management</h2>
+      <section class="current-orders">
+        <h3>Current Orders</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer Name</th>
+              <th>Status</th>
+              <th>Order Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>Peter Maina</td>
+              <td>Processing</td>
+              <td>2023-02-01</td>
+              <td>
+                <button onclick="newOrderView('001')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>Amy Wanjala</td>
+              <td>Shipped</td>
+              <td>2023-02-02</td>
+              <td>
+                <button onclick="newOrderView('002')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>Mark Donald</td>
+              <td>Delivered</td>
+              <td>2023-02-03</td>
+              <td>
+                <button onclick="newOrderView('003')">View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="add-order">
+        <h3>Add New Order</h3>
+        <form id="newOrderForm">
+          <label for="newOrderId">Order ID:</label>
+          <input type="text" id="newOrderId" required />
+          <label for="newCustomerName">Customer Name:</label>
+          <input type="text" id="newCustomerName" required />
+          <label for="newOrderStatus">Order Status:</label>
+          <select id="newOrderStatus">
+            <option value="Processing">Processing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+          <label for="orderDate">Order Date:</label>
+          <input type="date" id="orderDate" required />
+          <button type="submit">Submit Order</button>
+        </form>
+      </section>
+      <section class="order-summary">
+        <h3>Order Summary</h3>
+        <div class="summary">
+          <div class="summary-item">
+            <h4>Total Orders</h4>
+            <p>3</p>
+          </div>
+          <div class="summary-item">
+            <h4>Orders Processing</h4>
+            <p>1</p>
+          </div>
+          <div class="summary-item">
+            <h4>Orders Shipped</h4>
+            <p>1</p>
+          </div>
+          <div class="summary-item">
+            <h4>Orders Delivered</h4>
+            <p>1</p>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Tracking & Status Update Section -->
+    <div id="trackingStatus" class="section">
+      <h2>Tracking and Status Update</h2>
+      <section class="track-order">
+        <h3>Track Your Order</h3>
+        <form id="trackForm">
+          <label for="trackingNumberTS">Tracking Number:</label>
+          <input type="text" id="trackingNumberTS" required />
+          <button type="submit">Track Order</button>
+        </form>
+        <div id="trackingResultTS" class="tracking-result"></div>
+      </section>
+      <section class="update-status">
+        <h3>Update Order Status</h3>
+        <form id="updateForm">
+          <label for="orderIdUS">Order ID:</label>
+          <input type="text" id="orderIdUS" required />
+          <label for="orderStatusUS">New Status:</label>
+          <select id="orderStatusUS">
+            <option value="Processing">Processing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Returned">Returned</option>
+          </select>
+          <button type="submit">Update Status</button>
+        </form>
+        <div id="updateResultUS" class="update-result"></div>
+      </section>
+      <section class="tracking-history">
+        <h3>Tracking History</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>Processing</td>
+              <td>2023-02-01</td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>Shipped</td>
+              <td>2023-02-02</td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>Delivered</td>
+              <td>2023-02-03</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+    
+    <!-- Carrier Details Section -->
+    <div id="carrierDetails" class="section">
+      <h2>Carrier Details Management</h2>
+      <section class="view-carriers">
+        <h3>Current Carriers</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Carrier ID</th>
+              <th>Carrier Name</th>
+              <th>Contact Number</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>Fast Shipping Co.</td>
+              <td>(123) 456-7890</td>
+              <td>contact@fastshipping.com</td>
+              <td>Active</td>
+              <td>
+                <button onclick="carrierEdit('001')">Edit</button>
+              </td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>Quick Deliveries</td>
+              <td>(098) 765-4321</td>
+              <td>info@quickdeliveries.com</td>
+              <td>Inactive</td>
+              <td>
+                <button onclick="carrierEdit('002')">Edit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="add-carrier">
+        <h3>Add New Carrier</h3>
+        <form id="carrierForm">
+          <label for="carrierName">Carrier Name:</label>
+          <input type="text" id="carrierName" required />
+          <label for="contactNumber">Contact Number:</label>
+          <input type="text" id="contactNumber" required />
+          <label for="email">Email:</label>
+          <input type="email" id="email" required />
+          <label for="status">Status:</label>
+          <select id="status" required>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+          <button type="submit">Add Carrier</button>
+        </form>
+        <div id="carrierResult" class="result-message"></div>
+      </section>
+    </div>
+    
+    <!-- Delivery Summary Section -->
+    <div id="deliverySummary" class="section">
+      <h2>Delivery Summary</h2>
+      <section class="input-delivery">
+        <h3>Input Delivery Details</h3>
+        <form id="deliveryForm">
+          <label for="deliveryDate">Delivery Date:</label>
+          <input type="date" id="deliveryDate" required />
+          <label for="totalDeliveries">Total Deliveries:</label>
+          <input type="number" id="totalDeliveries" required />
+          <label for="successfulDeliveries">Successful Deliveries:</label>
+          <input type="number" id="successfulDeliveries" required />
+          <label for="failedDeliveries">Failed Deliveries:</label>
+          <input type="number" id="failedDeliveries" required />
+          <button type="submit">Generate Summary</button>
+        </form>
+        <div id="summaryResult" class="result-message"></div>
+      </section>
+      <section class="summary-report">
+        <h3>Delivery Summary Report</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Delivery Date</th>
+              <th>Total Deliveries</th>
+              <th>Successful Deliveries</th>
+              <th>Failed Deliveries</th>
+              <th>Success Rate (%)</th>
+            </tr>
+          </thead>
+          <tbody id="summaryTableBody">
+            <!-- Dynamic content will be populated here -->
+          </tbody>
+        </table>
+      </section>
+    </div>
+    
+    <!-- Real-Time Tracking Section -->
+    <div id="realTimeTracking" class="section">
+      <h2>Real-Time Shipment Tracking</h2>
+      <section class="track-shipment">
+        <h3>Track Your Shipment</h3>
+        <form id="trackingFormRT">
+          <label for="trackingNumberRT">Tracking Number:</label>
+          <input type="text" id="trackingNumberRT" required />
+          <button type="submit">Track Shipment</button>
+        </form>
+        <div id="trackingResultRT" class="tracking-result"></div>
+      </section>
+      <section class="shipment-history">
+        <h3>Tracking History</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tracking Number</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBodyRT">
+            <!-- Dynamic content will be populated here -->
+          </tbody>
+        </table>
+      </section>
+    </div>
+    
+    <!-- Return and Exchange Section -->
+    <div id="returnExchange" class="section">
+      <h2>Return and Exchange Management</h2>
+      <section class="initiate-return">
+        <h3>Initiate a Return</h3>
+        <form id="returnForm">
+          <label for="returnOrderId">Order ID:</label>
+          <input type="text" id="returnOrderId" required />
+          <label for="returnReason">Reason for Return:</label>
+          <select id="returnReason" required>
+            <option value="Damaged">Damaged</option>
+            <option value="Wrong Item">Wrong Item</option>
+            <option value="Size Issue">Size Issue</option>
+            <option value="Not as Described">Not as Described</option>
+          </select>
+          <label for="returnComment">Additional Comments:</label>
+          <textarea id="returnComment" rows="4"></textarea>
+          <button type="submit">Submit Return Request</button>
+        </form>
+        <div id="returnResult" class="result-message"></div>
+      </section>
+      <section class="manage-exchanges">
+        <h3>Manage Exchanges</h3>
+        <form id="exchangeForm">
+          <label for="exchangeOrderId">Order ID:</label>
+          <input type="text" id="exchangeOrderId" required />
+          <label for="newItem">New Item:</label>
+          <input type="text" id="newItem" required />
+          <label for="exchangeReason">Reason for Exchange:</label>
+          <select id="exchangeReason" required>
+            <option value="Wrong Size">Wrong Size</option>
+            <option value="Changed Mind">Changed Mind</option>
+            <option value="Defective Item">Defective Item</option>
+          </select>
+          <button type="submit">Submit Exchange Request</button>
+        </form>
+        <div id="exchangeResult" class="result-message"></div>
+      </section>
+      <section class="return-requests">
+        <h3>Return Requests</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer Name</th>
+              <th>Reason</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>Peter Maina</td>
+              <td>Damaged</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>Amy Wanjala</td>
+              <td>Wrong Item</td>
+              <td>Processed</td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>Mark Donald</td>
+              <td>Size Issue</td>
+              <td>Pending</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+    
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      const menuIcon = document.getElementById("menuIcon");
+      sidebar.classList.toggle("active");
+      if (sidebar.classList.contains("active")) {
+        menuIcon.textContent = "✖";
+      } else {
+        menuIcon.textContent = "☰";
+      }
+    }
+    
+    // Navigation: show the selected section, hide others, and update active class on buttons
+    function showSection(sectionId, btn) {
+      // Hide all sections
+      document.querySelectorAll(".section").forEach(function (sec) {
+        sec.style.display = "none";
+      });
+      // Show the selected section
+      document.getElementById(sectionId).style.display = "block";
+      
+      // Remove active class from all top navigation buttons
+      document.querySelectorAll(".top-nav ul li button").forEach(function (button) {
+        button.classList.remove("active");
+      });
+      // Add active class to the clicked button (if provided)
+      if (btn) {
+        btn.classList.add("active");
+      }
+    }
+    
+    // Show Order Processing by default
+    showSection("orderProcessing");
+    
+    /* ------------------ Order Processing Section JS ------------------ */
+    function orderProcessingProcess(orderId) {
+      alert("Processing order: " + orderId);
+    }
+    document
+      .getElementById("orderProcessingForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        var id = document.getElementById("orderProcessingId").value;
+        var customer = document.getElementById("orderProcessingCustomer").value;
+        var status = document.getElementById("orderProcessingStatus").value;
+        console.log(
+          "Order Processed: ID=" +
+            id +
+            ", Customer=" +
+            customer +
+            ", Status=" +
+            status
+        );
+        this.reset();
+      });
+    
+    /* ------------------ New Order Section JS ------------------ */
+    function newOrderView(orderId) {
+      alert("Viewing order: " + orderId);
+    }
+    document
+      .getElementById("newOrderForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        var id = document.getElementById("newOrderId").value;
+        var name = document.getElementById("newCustomerName").value;
+        var status = document.getElementById("newOrderStatus").value;
+        var date = document.getElementById("orderDate").value;
+        console.log(
+          "New Order: ID=" +
+            id +
+            ", Name=" +
+            name +
+            ", Status=" +
+            status +
+            ", Date=" +
+            date
+        );
+        this.reset();
+      });
+    
+    /* ------------------ Tracking & Status Section JS ------------------ */
+    document
+      .getElementById("trackForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        var trackingNumber = document.getElementById("trackingNumberTS").value;
+        document.getElementById("trackingResultTS").textContent =
+          "Tracking Order: " + trackingNumber + " - Status: Shipped";
+      });
+    document
+      .getElementById("updateForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        var orderId = document.getElementById("orderIdUS").value;
+        var status = document.getElementById("orderStatusUS").value;
+        document.getElementById("updateResultUS").textContent =
+          "Order ID: " + orderId + " has been updated to: " + status;
+        this.reset();
+      });
+    
+    /* ------------------ Carrier Details Section JS ------------------ */
+    function carrierEdit(carrierId) {
+      alert("Editing Carrier ID: " + carrierId);
+    }
+    document
+      .getElementById("carrierForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = document.getElementById("carrierName").value;
+        var contact = document.getElementById("contactNumber").value;
+        var email = document.getElementById("email").value;
+        var status = document.getElementById("status").value;
+        document.getElementById("carrierResult").textContent =
+          "New Carrier Added: " + name + " - Status: " + status;
+        this.reset();
+      });
+    
+    /* ------------------ Delivery Summary Section JS ------------------ */
+    var deliverySummaries = [];
+    document
+      .getElementById("deliveryForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        var date = document.getElementById("deliveryDate").value;
+        var total = parseInt(document.getElementById("totalDeliveries").value);
+        var successful = parseInt(
+          document.getElementById("successfulDeliveries").value
+        );
+        var failed = parseInt(document.getElementById("failedDeliveries").value);
+        var successRate = ((successful / total) * 100).toFixed(2);
+        var summary = {
+          date: date,
+          total: total,
+          successful: successful,
+          failed: failed,
+          rate: successRate,
+        };
+        deliverySummaries.push(summary);
+        document.getElementById("summaryResult").textContent =
+          "Delivery Summary Generated for " + date + ".";
+        this.reset();
+        updateSummaryTable();
+      });
+    function updateSummaryTable() {
+      var tbody = document.getElementById("summaryTableBody");
+      tbody.innerHTML = "";
+      deliverySummaries.forEach(function (summary) {
+        var row = document.createElement("tr");
+        row.innerHTML =
+          "<td>" +
+          summary.date +
+          "</td><td>" +
+          summary.total +
+          "</td><td>" +
+          summary.successful +
+          "</td><td>" +
+          summary.failed +
+          "</td><td>" +
+          summary.rate +
+          "</td>";
+        tbody.appendChild(row);
+      });
+    }
+    
+    /* ------------------ Real-Time Tracking Section JS ------------------ */
+    var trackingData = {
+      "123456": [
+        { status: "Order Placed", date: "2023-02-01", location: "Warehouse" },
+        { status: "Shipped", date: "2023-02-02", location: "Distribution Center" },
+        { status: "Out for Delivery", date: "2023-02-03", location: "Local Depot" },
+        { status: "Delivered", date: "2023-02-04", location: "Customer Address" }
+      ],
+      "654321": [
+        { status: "Order Placed", date: "2023-02-02", location: "Warehouse" },
+        { status: "Shipped", date: "2023-02-03", location: "Distribution Center" },
+        { status: "In Transit", date: "2023-02-04", location: "On Route" }
+      ]
+    };
+    document
+      .getElementById("trackingFormRT")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        var tn = document.getElementById("trackingNumberRT").value;
+        var resultDiv = document.getElementById("trackingResultRT");
+        var tbody = document.getElementById("historyTableBodyRT");
+        resultDiv.textContent = "";
+        tbody.innerHTML = "";
+        if (trackingData[tn]) {
+          resultDiv.textContent = "Tracking Number: " + tn;
+          trackingData[tn].forEach(function (entry) {
+            var row = document.createElement("tr");
+            row.innerHTML =
+              "<td>" +
+              tn +
+              "</td><td>" +
+              entry.status +
+              "</td><td>" +
+              entry.date +
+              "</td><td>" +
+              entry.location +
+              "</td>";
+            tbody.appendChild(row);
+          });
+        } else {
+          resultDiv.textContent =
+            "No tracking information found for this number.";
+        }
+      });
+    
+    /* ------------------ Return & Exchange Section JS ------------------ */
+    document
+      .getElementById("returnForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        var orderId = document.getElementById("returnOrderId").value;
+        var reason = document.getElementById("returnReason").value;
+        document.getElementById("returnResult").textContent =
+          "Return Request Submitted for Order ID: " +
+          orderId +
+          " - Reason: " +
+          reason;
+        this.reset();
+      });
+    document
+      .getElementById("exchangeForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        var orderId = document.getElementById("exchangeOrderId").value;
+        var newItem = document.getElementById("newItem").value;
+        document.getElementById("exchangeResult").textContent =
+          "Exchange Request Submitted for Order ID: " +
+          orderId +
+          " - New Item: " +
+          newItem;
+        this.reset();
+      });
+  </script>
+</body>
+
+<footer><a href="auth.html"><strong>logout </strong></a></footer>
+
+
+</html>
