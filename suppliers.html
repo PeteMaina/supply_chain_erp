@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppliers Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, select, textarea, button {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Suppliers Management</h1>
+        <div class="form-container">
+            <h2>Add New Supplier</h2>
+            <form id="add-supplier-form">
+                <input type="text" id="new-name" placeholder="Supplier Name" required>
+                <input type="email" id="new-email" placeholder="Email" required>
+                <input type="text" id="new-phone" placeholder="Phone" required>
+                <select id="new-category" required>
+                    <option value="Engine Parts">Engine Parts</option>
+                    <option value="Braking System">Braking System</option>
+                    <option value="Suspension">Suspension</option>
+                    <option value="Electrical Components">Electrical Components</option>
+                </select>
+                <select id="new-status" required>
+                    <option value="Processing">Processing</option>
+                    <option value="In Transit">In Transit</option>
+                    <option value="Awaiting Shipment">Awaiting Shipment</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+                <button type="submit">Add Supplier</button>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="supplier-table-body"></tbody>
+        </table>
+    </div>
+    <script>
+        let suppliers = [
+            { name: "AutoTech Supplies", email: "contact@autotech.com", phone: "123-456-7890", category: "Engine Parts", status: "In Transit", orders: [] },
+            { name: "BrakeMasters Inc.", email: "info@brakemasters.com", phone: "987-654-3210", category: "Braking System", status: "Processing", orders: [] },
+            { name: "ElectroCar Parts", email: "sales@electrocar.com", phone: "555-666-7777", category: "Electrical Components", status: "Delivered", orders: [] }
+        ];
+        
+        function renderSuppliers() {
+            const tableBody = document.getElementById("supplier-table-body");
+            tableBody.innerHTML = "";
+            suppliers.forEach((supplier, index) => {
+                const row = `<tr>
+                    <td>${supplier.name}</td>
+                    <td>${supplier.email}</td>
+                    <td>${supplier.phone}</td>
+                    <td>${supplier.category}</td>
+                    <td>${supplier.status}</td>
+                    <td>
+                        <button class='edit-btn' onclick='editSupplier(${index})'>Edit</button>
+                        <button class='delete-btn' onclick='deleteSupplier(${index})'>Delete</button>
+                    </td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+        
+        document.getElementById("add-supplier-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const newSupplier = {
+                name: document.getElementById("new-name").value,
+                email: document.getElementById("new-email").value,
+                phone: document.getElementById("new-phone").value,
+                category: document.getElementById("new-category").value,
+                status: document.getElementById("new-status").value,
+                orders: []
+            };
+            suppliers.push(newSupplier);
+            renderSuppliers();
+            this.reset();
+        });
+        
+        function deleteSupplier(index) {
+            suppliers.splice(index, 1);
+            renderSuppliers();
+        }
+        
+        function editSupplier(index) {
+            alert("Edit functionality will be implemented here");
+        }
+        
+        renderSuppliers();
+    </script>
+</body>
+</html>
