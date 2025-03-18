@@ -256,7 +256,7 @@ a {
             <li><a href="inventory.php">📦 Inventory Management</a></li>
             <li><a href="orders.php">🚚 Order and logistics</a></li>
             <li><a href="suppliers.php">📈 Suppliers</a></li>
-            <li><a href="#">⚙️ Settings</a></li>
+            <li><a href="profile.php">⚙️ Profile</a></li>
         </ul>
     </div>
 

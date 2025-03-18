@@ -256,6 +256,30 @@ foreach ($categories as $category) {
     }
 }
 
+//USERS TABLES
+$sql = "CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    profile_picture VARCHAR(255),
+    address TEXT,
+    role ENUM('admin', 'manager', 'staff'),
+    bio TEXT,  -- Short user bio
+    company VARCHAR(255), -- If needed
+    last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+//seperate log activity
+$sql = "CREATE TABLE IF NOT EXISTS user_activity (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    action TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)";
+
+
 echo "<p>Database setup completed. <a href='auth.php'>Go to login page</a></p>";
 
 $conn->close();
