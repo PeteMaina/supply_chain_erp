@@ -853,7 +853,7 @@ $result_categories_list = $conn->query($sql_categories_list);
             <li class="active"><a href="inventory.php">📦 Inventory Management</a></li>
             <li><a href="orders.php">🚚 Order and logistics</a></li>
             <li><a href="suppliers.php">📈 Suppliers</a></li>
-            <li><a href="#">⚙️ Settings</a></li>
+            <li><a href="profile.php">⚙️ Profile</a></li>
         </ul>
     </div>
 
@@ -885,7 +885,7 @@ $result_categories_list = $conn->query($sql_categories_list);
                         <div class="card-number"><?php echo $categories_count; ?></div>
                         <div>Category</div>
                     </div>
-                    <a href="#" class="more-info">More Info →</a>
+                    <a href="category-info.html" class="more-info">More Info →</a>
                 </div>
             </div>
             <div class="col-md-3">
@@ -894,7 +894,7 @@ $result_categories_list = $conn->query($sql_categories_list);
                         <div class="card-number"><?php echo $products_count; ?></div>
                         <div>Product</div>
                     </div>
-                    <a href="#" class="more-info">More Info →</a>
+                    <a href="product-info.html" class="more-info">More Info →</a>
                 </div>
             </div>
             <div class="col-md-3">
@@ -915,7 +915,7 @@ $result_categories_list = $conn->query($sql_categories_list);
                         <div class="card-number"><?php echo $suppliers_count; ?></div>
                         <div>Supplier</div>
                     </div>
-                    <a href="#" class="more-info">More Info →</a>
+                    <a href="supplier-info.html" class="more-info">More Info →</a>
                 </div>
             </div>
             <div class="col-md-4">

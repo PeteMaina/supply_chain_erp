@@ -12,9 +12,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 require_once "db_connect.php";
 
 // Get product counts
-$sql_total_products = "SELECT COUNT(*) as total FROM products";
-$result_total_products = $conn->query($sql_total_products);
-$total_products = $result_total_products->fetch_assoc()["total"];
+// $sql_total_products = "SELECT COUNT(*) as total FROM products";
+// $result_total_products = $conn->query($sql_total_products);
+// $total_products = $result_total_products->fetch_assoc()["total"];
+$total_products_query = "SELECT SUM(quantity) as total_quantity FROM products";
+$total_products_result = $conn->query($total_products_query);
+$total_products_row = $total_products_result->fetch_assoc();
+$total_product_quantity = $total_products_row['total_quantity'];
+
 
 $sql_out_of_stock = "SELECT COUNT(*) as total FROM products WHERE quantity = 0";
 $result_out_of_stock = $conn->query($sql_out_of_stock);
@@ -269,7 +274,7 @@ a {
       <section class="cards">
         <div class="card">
           <h3>Count of all products</h3>
-          <p><?php echo $total_products; ?> products</p>
+          <p><?php echo number_format($total_product_quantity) ?> products</p>
         </div>
         <div class="card">
           <h3>Products out of stock</h3>
