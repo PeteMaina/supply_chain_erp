@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotive Categories Information</title>
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+    <style>
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            color: #198754;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #198754;
+            padding-bottom: 10px;
+        }
+
+        .category-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #0d6efd;
+            margin-bottom: 15px;
+            border-left: 4px solid #0d6efd;
+            padding-left: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #198754;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #146c43;
+        }
+
+        .back-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f8f9fa;
+        }
+
+        body.dark-mode .container {
+            background-color: #2d2d2d;
+            color: #f8f9fa;
+        }
+
+        body.dark-mode .category-section {
+            background-color: #3d3d3d;
+        }
+
+        body.dark-mode h1 {
+            color: #28a745;
+            border-bottom-color: #28a745;
+        }
+
+        body.dark-mode h2 {
+            color: #6ea8fe;
+            border-left-color: #6ea8fe;
+        }
+
+        /* Toggle button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #198754;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            background-color: #146c43;
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background-color: #6ea8fe;
+        }
+    </style>
+</head>
+<body>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌓</button>
+    
+    <div class="container">
+        <h1>Automotive Parts Categories</h1>
+        
+        <div class="category-section">
+            <h2>Accessories</h2>
+            <p>Our Accessories category includes a wide range of products designed to enhance the comfort, convenience, and aesthetics of your vehicle. This includes interior accessories such as seat covers, floor mats, steering wheel covers, and organizers, as well as exterior accessories like car covers, window deflectors, and decorative elements.</p>
+            <p>We also offer technological accessories such as dash cams, GPS systems, smartphone mounts, and audio upgrades. All accessories are selected for their quality, durability, and compatibility with various vehicle makes and models. Many items are available in different styles and finishes to match your vehicle's interior and exterior design.</p>
+        </div>
+        
+        <div class="category-section">
+            <h2>Braking System</h2>
+            <p>The Braking System category encompasses all components essential for your vehicle's stopping power and safety. This includes brake pads, rotors, calipers, drums, shoes, master cylinders, brake lines, and brake fluid.</p>
+            <p>Our braking components are sourced from trusted manufacturers known for their commitment to safety and performance. We offer options ranging from OEM-equivalent parts to high-performance upgrades for various driving conditions. All braking system components undergo rigorous testing to ensure reliability, durability, and optimal stopping power under diverse driving conditions.</p>
+        </div>
+        
+        <div class="category-section">
+            <h2>Electrical Components</h2>
+            <p>Our Electrical Components category features a comprehensive range of parts that power and control your vehicle's electrical systems. This includes batteries, alternators, starters, ignition components, sensors, switches, relays, fuses, and wiring harnesses.</p>
+            <p>We also stock lighting components such as headlights, tail lights, turn signals, and interior lighting. Our electrical components meet or exceed OEM specifications and are tested for reliability and longevity. We offer both direct replacement parts and performance upgrades to enhance your vehicle's electrical system efficiency and functionality.</p>
+        </div>
+        
+        <div class="category-section">
+            <h2>Engine Parts</h2>
+            <p>The Engine Parts category includes all components essential for your vehicle's powertrain system. This encompasses pistons, rings, bearings, valves, camshafts, timing belts and chains, oil pumps, water pumps, gaskets, and seals.</p>
+            <p>We also offer complete engine rebuild kits, cylinder heads, and engine blocks for major repairs. Our engine components are sourced from reputable manufacturers and are available in various grades, from OEM replacements to high-performance options. All engine parts are precision-engineered to ensure proper fit, function, and durability, helping to maximize your engine's performance and lifespan.</p>
+        </div>
+        
+        <div class="category-section">
+            <h2>Tires</h2>
+            <p>Our Tires category features a diverse selection of tires designed for different vehicles, driving conditions, and performance requirements. This includes all-season tires, summer tires, winter/snow tires, all-terrain tires, and performance tires in various sizes and speed ratings.</p>
+            <p>We partner with leading tire manufacturers known for their quality, innovation, and safety standards. Our tire inventory is regularly updated to include the latest models with advanced technologies for improved traction, fuel efficiency, comfort, and longevity. We also offer tire accessories such as TPMS sensors, valve stems, and wheel weights, as well as professional mounting and balancing services.</p>
+        </div>
+        
+        <div class="back-btn">
+            <a href="inventory.php" class="btn">Back to Inventory</a>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>

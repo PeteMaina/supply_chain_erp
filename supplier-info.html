@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Information</title>
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+    <style>
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            color: #6f42c1;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #6f42c1;
+            padding-bottom: 10px;
+        }
+
+        .info-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+
+        h2 {
+            color: #6f42c1;
+            margin-bottom: 15px;
+            border-left: 4px solid #6f42c1;
+            padding-left: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .supplier-examples {
+            margin-top: 40px;
+        }
+
+        .supplier-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .supplier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .supplier-card h3 {
+            color: #0d6efd;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 5px;
+        }
+
+        .supplier-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .supplier-info {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .supplier-stats {
+            flex: 1;
+            min-width: 250px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-left: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed #dee2e6;
+            padding-bottom: 8px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #6f42c1;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #5a32a3;
+        }
+
+        .back-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f8f9fa;
+        }
+
+        body.dark-mode .container {
+            background-color: #2d2d2d;
+            color: #f8f9fa;
+        }
+
+        body.dark-mode .info-section,
+        body.dark-mode .supplier-stats {
+            background-color: #3d3d3d;
+        }
+
+        body.dark-mode .supplier-card {
+            background-color: #2d2d2d;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2 {
+            color: #bb86fc;
+            border-color: #bb86fc;
+        }
+
+        body.dark-mode h3 {
+            color: #90caf9;
+            border-color: #4d4d4d;
+        }
+
+        body.dark-mode .stat-item {
+            border-color: #4d4d4d;
+        }
+
+        /* Toggle button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #6f42c1;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            background-color: #5a32a3;
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background-color: #bb86fc;
+        }
+    </style>
+</head>
+<body>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌓</button>
+    
+    <div class="container">
+        <h1>Supplier Information</h1>
+        
+        <div class="info-section">
+            <h2>About Our Suppliers</h2>
+            <p>Our suppliers are carefully selected partners who provide the high-quality products that form the foundation of our inventory. We maintain strong relationships with a diverse network of suppliers, ranging from large manufacturers to specialized artisans and local producers.</p>
+            
+            <p>We evaluate potential suppliers based on several key criteria:</p>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li>Product quality and consistency</li>
+                <li>Reliability and on-time delivery</li>
+                <li>Competitive pricing</li>
+                <li>Ethical business practices</li>
+                <li>Environmental sustainability</li>
+                <li>Compliance with industry regulations</li>
+                <li>Financial stability</li>
+                <li>Customer service and support</li>
+            </ul>
+            
+            <p>Our supplier relationships are managed through a comprehensive system that tracks performance metrics, maintains communication records, and schedules regular reviews. This ensures we maintain high standards across our entire supply chain.</p>
+        </div>
+        
+        <div class="supplier-examples">
+            <h2>Example Suppliers</h2>
+            
+            <div class="supplier-card">
+                <h3>AutoTech Supplies</h3>
+                <div class="supplier-details">
+                    <div class="supplier-info">
+                        <p><strong>Location:</strong> Nairobi, Kenya</p>
+                        <p><strong>Specialization:</strong> Engine Parts</p>
+                        <p><strong>Partnership since:</strong> 2018</p>
+                        <p>AutoTech Supplies provides high-quality engine parts with a strong focus on durability and performance.</p>
+                    </div>
+                    <div class="supplier-stats">
+                        <h4>Performance Metrics</h4>
+                        <div class="stat-item">
+                            <span>On-time delivery:</span>
+                            <span>98.5%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Quality rating:</span>
+                            <span>4.9/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Response time:</span>
+                            <span>< 24 hours</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Return rate:</span>
+                            <span>< 1%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="supplier-card">
+                <h3>FastParts Inc.</h3>
+                <div class="supplier-details">
+                    <div class="supplier-info">
+                        <p><strong>Location:</strong> Mombasa, Kenya</p>
+                        <p><strong>Specialization:</strong> Braking System</p>
+                        <p><strong>Partnership since:</strong> 2018</p>
+                        <p>FastParts Inc. is known for supplying reliable braking system components that meet international safety standards.</p>
+                    </div>
+                    <div class="supplier-stats">
+                        <h4>Performance Metrics</h4>
+                        <div class="stat-item">
+                            <span>On-time delivery:</span>
+                            <span>96.2%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Quality rating:</span>
+                            <span>4.8/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Response time:</span>
+                            <span>< 48 hours</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Return rate:</span>
+                            <span>2.1%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="supplier-card">
+                <h3>BrakeMasters Inc.</h3>
+                <div class="supplier-details">
+                    <div class="supplier-info">
+                        <p><strong>Location:</strong> Kisumu, Kenya</p>
+                        <p><strong>Specialization:</strong> Braking System</p>
+                        <p><strong>Partnership since:</strong> 2020</p>
+                        <p>BrakeMasters Inc. provides high-performance brake components suitable for various vehicle types.</p>
+                    </div>
+                    <div class="supplier-stats">
+                        <h4>Performance Metrics</h4>
+                        <div class="stat-item">
+                            <span>On-time delivery:</span>
+                            <span>99.1%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Quality rating:</span>
+                            <span>4.95/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Response time:</span>
+                            <span>< 12 hours</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Return rate:</span>
+                            <span>0.5%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="supplier-card">
+                <h3>TreadMax Ltd.</h3>
+                <div class="supplier-details">
+                    <div class="supplier-info">
+                        <p><strong>Location:</strong> Eldoret, Kenya</p>
+                        <p><strong>Specialization:</strong> Tires</p>
+                        <p><strong>Partnership since:</strong> 2020</p>
+                        <p>TreadMax Ltd. supplies high-quality tires designed for various road conditions, ensuring safety and durability.</p>
+                    </div>
+                    <div class="supplier-stats">
+                        <h4>Performance Metrics</h4>
+                        <div class="stat-item">
+                            <span>On-time delivery:</span>
+                            <span>97.3%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Quality rating:</span>
+                            <span>4.7/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Response time:</span>
+                            <span>< 24 hours</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Return rate:</span>
+                            <span>1.2%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="supplier-card">
+                <h3>ElectroParts Organization</h3>
+                <div class="supplier-details">
+                    <div class="supplier-info">
+                        <p><strong>Location:</strong> Nakuru, Kenya</p>
+                        <p><strong>Specialization:</strong> Electrical Components</p>
+                        <p><strong>Partnership since:</strong> 2017</p>
+                        <p>ElectroParts Kenya provides top-grade electrical components, ensuring efficient and reliable vehicle performance.</p>
+                    </div>
+                    <div class="supplier-stats">
+                        <h4>Performance Metrics</h4>
+                        <div class="stat-item">
+                            <span>On-time delivery:</span>
+                            <span>98.9%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Quality rating:</span>
+                            <span>4.8/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Response time:</span>
+                            <span>< 24 hours</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Return rate:</span>
+                            <span>0.8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="back-btn">
+            <a href="inventory.php" class="btn">Back to Inventory</a>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
